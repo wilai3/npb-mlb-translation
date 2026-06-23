@@ -1,0 +1,29 @@
+name,bbref_id,position_type,npb_team,mlb_team,npb_seasons,mlb_games,notes,dataset
+Hideo Nomo,nomohi01,pitcher,Kintetsu Buffaloes,LAD/NYM/MIL/BOS/DET/CLE,1990-1994,323,,core
+Hideki Irabu,irabuhi01,pitcher,Lotte Marines,NYY/MON/TEX,1988-1996,79,borderline MLB sample,core
+Masato Yoshii,yoshima01,pitcher,Yakult Swallows,NYM/COL/ATL/MON,1986-1997,113,,core
+Shigetoshi Hasegawa,hasegsh01,pitcher,Orix BlueWave,CAL/ANA/SEA,1989-1996,322,,core
+Kazuhiro Sasaki,sasakka01,pitcher,Yokohama BayStars,SEA,1986-1999,220,,core
+Akinori Otsuka,otsukak01,pitcher,Chunichi Dragons,SDP/TEX,1995-2003,186,,core
+Daisuke Matsuzaka,matsuda01,pitcher,Seibu Lions,BOS/NYM/CLE,1999-2006,193,,core
+Hiroki Kuroda,kurodhi01,pitcher,Hiroshima Carp,LAD/NYY,1997-2007,320,,core
+Ryota Igarashi,igarary01,pitcher,Yakult Swallows,NYM/TOR,1998-2009,95,,core
+Hisashi Iwakuma,iwakuhi01,pitcher,Rakuten Eagles,SEA,1999-2010,137,,core
+Yu Darvish,darviyu01,pitcher,Nippon Ham Fighters,TEX/LAD/CHC/SDP,2005-2011,300,,core
+Masahiro Tanaka,tanakma01,pitcher,Rakuten Eagles,NYY,2007-2013,175,,core
+Shohei Ohtani (P),ohtansh01,pitcher,Nippon Ham Fighters,LAA/LAD,2013-2017,800,two-way split - flag in model,core
+Ichiro Suzuki,suzukic01,hitter,Orix BlueWave,SEA/NYY/MIA,1992-2000,2653,,core
+Hideki Matsui,matsuhi01,hitter,Yomiuri Giants,NYY/LAA/OAK/TBR,1993-2002,1236,,core
+Tsuyoshi Shinjo,shinjts01,hitter,Hanshin Tigers,NYM/SFG/MON,1991-2000,322,,core
+So Taguchi,tagucso01,hitter,Orix BlueWave,STL/PHI,1991-2002,477,,core
+Kazuo Matsui,matsuka01,hitter,Seibu Lions,NYM/COL/HOU/ATL,1990-2003,693,,core
+Akinori Iwamura,iwamuak01,hitter,Yakult Swallows,TBR/PIT/OAK,1997-2006,481,,core
+Kosuke Fukudome,fukudko01,hitter,Chunichi Dragons,CHC/CLE/CHW,1998-2007,477,,core
+Nori Aoki,aokino01,hitter,Yakult Swallows,MIL/KCR/SFG/SEA/HOU,2004-2011,672,,core
+Yoshi Tsutsugo,tsutsyo01,hitter,DeNA BayStars,TBR/PIT/LAD,2007-2019,186,,core
+Seiya Suzuki,suzukse01,hitter,Hiroshima Carp,CHC,2013-2021,390,,core
+Shohei Ohtani (H),ohtansh01,hitter,Nippon Ham Fighters,LAA/LAD,2013-2017,800,two-way split - flag in model,core
+Kodai Senga,sengako01,pitcher,Fukuoka SoftBank Hawks,NYM,2015-2022,29,validation - injury limited,validation
+Yoshinobu Yamamoto,yamamyo01,pitcher,Orix Buffaloes,LAD,2017-2023,55,validation - 1 season,validation
+Munetaka Murakami,murakmu01,hitter,Yakult Swallows,CHW,2018-2025,80,validation - 2026 rookie,validation
+Tatsuya Imai,imaita01,pitcher,Seibu Lions,HOU,2018-2025,15,validation - 2026 rookie,validation
