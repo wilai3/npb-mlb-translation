@@ -43,7 +43,10 @@ import time
 
 cache.enable()  # cache FanGraphs responses to disk; avoids duplicate fetches
 
-PLAYER_LIST = "npb_mlb_player_list.csv"
+ROOT     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(ROOT, "data")
+
+PLAYER_LIST = os.path.join(ROOT, "npb_mlb_player_list.csv")
 
 # Manual FanGraphs ID mapping (bbref_id -> fangraphs_id)
 # Verify at: https://www.fangraphs.com/players/<name>/<id>
@@ -201,15 +204,15 @@ def main():
     # Save outputs
     if hitting_frames:
         hits_df = pd.concat(hitting_frames, ignore_index=True)
-        hits_df.to_csv("mlb_hitting_stats_raw.csv", index=False)
-        print(f"\nSaved mlb_hitting_stats_raw.csv — {len(hits_df)} rows")
+        hits_df.to_csv(os.path.join(DATA_DIR, "mlb_hitting_stats_raw.csv"), index=False)
+        print(f"\nSaved data/mlb_hitting_stats_raw.csv — {len(hits_df)} rows")
     else:
         print("\nNo hitting data collected.")
 
     if pitching_frames:
         pit_df = pd.concat(pitching_frames, ignore_index=True)
-        pit_df.to_csv("mlb_pitching_stats_raw.csv", index=False)
-        print(f"Saved mlb_pitching_stats_raw.csv — {len(pit_df)} rows")
+        pit_df.to_csv(os.path.join(DATA_DIR, "mlb_pitching_stats_raw.csv"), index=False)
+        print(f"Saved data/mlb_pitching_stats_raw.csv — {len(pit_df)} rows")
     else:
         print("No pitching data collected.")
 

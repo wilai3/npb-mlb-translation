@@ -3,11 +3,14 @@ Phase 4 — Validation: project NPB→MLB performance for recent crossover playe
 using translation factors (naive) and OLS regression, then compare to actuals.
 """
 
+import os
 import sqlite3
 import numpy as np
 import pandas as pd
 
-DB_PATH = "npb_mlb.db"
+ROOT     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(ROOT, "data")
+DB_PATH  = os.path.join(DATA_DIR, "npb_mlb.db")
 pd.set_option("display.float_format", "{:.4f}".format)
 pd.set_option("display.max_columns", None)
 pd.set_option("display.width", 200)
@@ -390,8 +393,8 @@ overall_mae(pit_val_df, "PITCHING")
 # STEP 7 — Save
 # ─────────────────────────────────────────────────────────────────────────────
 
-hit_val_df.to_csv("validation_results_hitting.csv",  index=False)
-pit_val_df.to_csv("validation_results_pitching.csv", index=False)
+hit_val_df.to_csv(os.path.join(DATA_DIR, "validation_results_hitting.csv"),  index=False)
+pit_val_df.to_csv(os.path.join(DATA_DIR, "validation_results_pitching.csv"), index=False)
 
 conn = sqlite3.connect(DB_PATH)
 print()

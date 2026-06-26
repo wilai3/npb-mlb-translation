@@ -25,12 +25,16 @@ Notes:
     - If a player returns no data, run with DEBUG=True to inspect table IDs
 """
 
+import os
 import requests
 from bs4 import BeautifulSoup, Comment
 import pandas as pd
 import time
 
-PLAYER_LIST = "npb_mlb_player_list.csv"
+ROOT     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(ROOT, "data")
+
+PLAYER_LIST = os.path.join(ROOT, "npb_mlb_player_list.csv")
 HEADERS     = {"User-Agent": "Mozilla/5.0"}
 DELAY       = 4    # seconds between requests
 DEBUG       = True  # set True to print table IDs found on each page
@@ -250,15 +254,15 @@ def main():
     # Save outputs
     if hitting_frames:
         hits_df = pd.concat(hitting_frames, ignore_index=True)
-        hits_df.to_csv("npb_hitting_stats_raw.csv", index=False)
-        print(f"\nSaved npb_hitting_stats_raw.csv — {len(hits_df)} rows")
+        hits_df.to_csv(os.path.join(DATA_DIR, "npb_hitting_stats_raw.csv"), index=False)
+        print(f"\nSaved data/npb_hitting_stats_raw.csv — {len(hits_df)} rows")
     else:
         print("\nNo hitting data collected.")
  
     if pitching_frames:
         pit_df = pd.concat(pitching_frames, ignore_index=True)
-        pit_df.to_csv("npb_pitching_stats_raw.csv", index=False)
-        print(f"Saved npb_pitching_stats_raw.csv — {len(pit_df)} rows")
+        pit_df.to_csv(os.path.join(DATA_DIR, "npb_pitching_stats_raw.csv"), index=False)
+        print(f"Saved data/npb_pitching_stats_raw.csv — {len(pit_df)} rows")
     else:
         print("No pitching data collected.")
  

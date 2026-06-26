@@ -4,12 +4,15 @@ LOO-CV MAE for generalization assessment.
 """
 
 import ast
+import os
 import sqlite3
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 
-DB_PATH = "npb_mlb.db"
+ROOT     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(ROOT, "data")
+DB_PATH  = os.path.join(DATA_DIR, "npb_mlb.db")
 pd.set_option("display.float_format", "{:.4f}".format)
 pd.set_option("display.max_columns", None)
 pd.set_option("display.width", 200)
@@ -238,8 +241,8 @@ for _, row in pit_results.iterrows():
 # STEP 5 — Save CSVs and load into DB
 # ──────────────────────────────────────────────────────────────
 
-hit_results.to_csv("regression_results_hitting.csv",  index=False)
-pit_results.to_csv("regression_results_pitching.csv", index=False)
+hit_results.to_csv(os.path.join(DATA_DIR, "regression_results_hitting.csv"),  index=False)
+pit_results.to_csv(os.path.join(DATA_DIR, "regression_results_pitching.csv"), index=False)
 
 print()
 for df, table in [

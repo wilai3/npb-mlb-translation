@@ -3,11 +3,14 @@ Winsorize extreme per-player ratios, recompute translation factors with
 confidence intervals, and compare v1 vs v2.
 """
 
+import os
 import sqlite3
 import numpy as np
 import pandas as pd
 
-DB_PATH = "npb_mlb.db"
+ROOT     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(ROOT, "data")
+DB_PATH  = os.path.join(DATA_DIR, "npb_mlb.db")
 pd.set_option("display.float_format", "{:.4f}".format)
 pd.set_option("display.max_columns", None)
 pd.set_option("display.width", 180)
@@ -153,8 +156,8 @@ print(fac_pit_v2[["stat", "factor", "n_players", "weighted_std",
 # STEP 5 — Save CSVs and load into DB
 # ──────────────────────────────────────────────
 
-fac_hit_v2.to_csv("translation_factors_hitting_v2.csv", index=False)
-fac_pit_v2.to_csv("translation_factors_pitching_v2.csv", index=False)
+fac_hit_v2.to_csv(os.path.join(DATA_DIR, "translation_factors_hitting_v2.csv"), index=False)
+fac_pit_v2.to_csv(os.path.join(DATA_DIR, "translation_factors_pitching_v2.csv"), index=False)
 
 print()
 for df, table in [

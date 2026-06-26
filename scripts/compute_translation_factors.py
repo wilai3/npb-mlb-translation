@@ -9,11 +9,14 @@ Steps:
   5. Save CSVs and load into npb_mlb.db.
 """
 
+import os
 import sqlite3
 import numpy as np
 import pandas as pd
 
-DB_PATH = "npb_mlb.db"
+ROOT     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(ROOT, "data")
+DB_PATH  = os.path.join(DATA_DIR, "npb_mlb.db")
 
 # ──────────────────────────────────────────────
 # Load data
@@ -283,10 +286,10 @@ print(pit_factors.to_string(index=False))
 # STEP 5 — Save CSVs and load into DB
 # ──────────────────────────────────────────────
 
-hit_factors.to_csv("translation_factors_hitting.csv",   index=False)
-pit_factors.to_csv("translation_factors_pitching.csv",  index=False)
-player_hit_df.to_csv("player_ratios_hitting.csv",       index=False)
-player_pit_df.to_csv("player_ratios_pitching.csv",      index=False)
+hit_factors.to_csv(os.path.join(DATA_DIR, "translation_factors_hitting.csv"),   index=False)
+pit_factors.to_csv(os.path.join(DATA_DIR, "translation_factors_pitching.csv"),  index=False)
+player_hit_df.to_csv(os.path.join(DATA_DIR, "player_ratios_hitting.csv"),       index=False)
+player_pit_df.to_csv(os.path.join(DATA_DIR, "player_ratios_pitching.csv"),      index=False)
 
 for df, table in [
     (hit_factors,    "translation_factors_hitting"),

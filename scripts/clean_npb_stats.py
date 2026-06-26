@@ -1,10 +1,15 @@
+import os
 import pandas as pd
 import sqlite3
 
+ROOT     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(ROOT, "data")
+DB_PATH  = os.path.join(DATA_DIR, "npb_mlb.db")
+
 # ── Load raw data ──────────────────────────────────────────────────────────
-players = pd.read_csv('npb_mlb_player_list.csv')
-hitting_raw = pd.read_csv('npb_hitting_stats_raw.csv')
-pitching_raw = pd.read_csv('npb_pitching_stats_raw.csv')
+players      = pd.read_csv(os.path.join(ROOT,     "npb_mlb_player_list.csv"))
+hitting_raw  = pd.read_csv(os.path.join(DATA_DIR, "npb_hitting_stats_raw.csv"))
+pitching_raw = pd.read_csv(os.path.join(DATA_DIR, "npb_pitching_stats_raw.csv"))
 
 print(f"Loaded: {len(hitting_raw)} hitting rows, {len(pitching_raw)} pitching rows, {len(players)} players")
 
@@ -36,7 +41,7 @@ dropped_pa_h = len(after_debut_filter_h) - len(h)
 h['years_before_mlb'] = h['mlb_debut_year'] - h['year_ID']
 
 hitting_clean_n = len(h)
-h.to_csv('npb_hitting_stats_clean.csv', index=False)
+h.to_csv(os.path.join(DATA_DIR, 'npb_hitting_stats_clean.csv'), index=False)
 
 # ── PITCHING ──────────────────────────────────────────────────────────────
 p = pitching_raw.copy()
@@ -68,10 +73,10 @@ p = after_ip_filter[~matsuzaka_null].copy()
 p['years_before_mlb'] = p['mlb_debut_year'] - p['year_ID']
 
 pitching_clean_n = len(p)
-p.to_csv('npb_pitching_stats_clean.csv', index=False)
+p.to_csv(os.path.join(DATA_DIR, 'npb_pitching_stats_clean.csv'), index=False)
 
 # ── SQLite ────────────────────────────────────────────────────────────────
-conn = sqlite3.connect('npb_mlb.db')
+conn = sqlite3.connect(DB_PATH)
 h.to_sql('npb_hitting',  conn, if_exists='replace', index=False)
 p.to_sql('npb_pitching', conn, if_exists='replace', index=False)
 players.to_sql('players', conn, if_exists='replace', index=False)
@@ -110,12 +115,12 @@ p_summary = (
 print(p_summary.to_string())
 
 print(f'\n{SEP}')
-print('SQLite tables in npb_mlb.db')
+print(f'SQLite tables in {DB_PATH}')
 print(SEP)
-conn = sqlite3.connect('npb_mlb.db')
+conn = sqlite3.connect(DB_PATH)
 for tbl, df in [('npb_hitting', h), ('npb_pitching', p), ('players', players)]:
     n = conn.execute(f'SELECT COUNT(*) FROM {tbl}').fetchone()[0]
     print(f'  {tbl:<15} {n:>4} rows')
 conn.close()
 
-print(f'\nOutputs: npb_hitting_stats_clean.csv, npb_pitching_stats_clean.csv, npb_mlb.db')
+print(f'\nOutputs: data/npb_hitting_stats_clean.csv, data/npb_pitching_stats_clean.csv, data/npb_mlb.db')
