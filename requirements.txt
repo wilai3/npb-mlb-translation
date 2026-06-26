@@ -1,2 +1,8 @@
-bs4
+beautifulsoup4
+numpy
+pandas
+plotly
 pybaseball
+requests
+statsmodels
+streamlit
