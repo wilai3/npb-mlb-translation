@@ -68,10 +68,9 @@ GAUGE_CFG = {
 }
 
 BAR_COLORS = {
-    "Naive Proj":      "#1f77b4",
-    "Reg Proj":        "#ff7f0e",
-    "Reg Proj (=Naive)": "#ff7f0e",
-    "Actual MLB":      "#7f7f7f",
+    "Naive Proj":  "#1f77b4",
+    "Reg Proj":    "#ff7f0e",
+    "Actual MLB":  "#7f7f7f",
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -266,8 +265,7 @@ def build_bar_chart(proj_list, actuals):
     for p in proj_list:
         lbl = STAT_DISPLAY.get(p["stat"], p["stat"])
         rows.append({"Stat": lbl, "Value": p["naive"], "Method": "Naive Proj"})
-        m_label = "Reg Proj" if p["method"] == "regression" else "Reg Proj (=Naive)"
-        rows.append({"Stat": lbl, "Value": p["reg"], "Method": m_label})
+        rows.append({"Stat": lbl, "Value": p["reg"], "Method": "Reg Proj"})
         if actuals:
             v = actuals.get(p["stat"])
             if v is not None and not (isinstance(v, float) and np.isnan(v)):
@@ -545,7 +543,7 @@ with tab1:
         raw_npb.style.format({
             col: "{:.3f}" for col in raw_npb.select_dtypes("float").columns
         }),
-        use_container_width=True, hide_index=True,
+        width='stretch', hide_index=True,
     )
 
     st.divider()
@@ -556,7 +554,7 @@ with tab1:
     st.caption("Pooled NPB rates (last 2 seasons):")
     st.dataframe(
         pd.DataFrame([npb_summary]),
-        use_container_width=True, hide_index=True,
+        width='stretch', hide_index=True,
     )
 
     st.divider()
@@ -571,12 +569,12 @@ with tab1:
             icon=None,
         )
 
-    st.plotly_chart(build_bar_chart(proj_list, actuals), use_container_width=True)
+    st.plotly_chart(build_bar_chart(proj_list, actuals), width='stretch')
 
     st.caption("\\* = regression model not significant; naive (factor) projection used instead")
 
     styled_tbl = render_proj_table(proj_list, actuals, stats_list)
-    st.dataframe(styled_tbl, use_container_width=True, hide_index=True)
+    st.dataframe(styled_tbl, width='stretch', hide_index=True)
 
     st.divider()
 
@@ -632,7 +630,7 @@ with tab2:
     st.caption("\\* = regression not significant; naive (factor) projection used")
     st.dataframe(
         render_proj_table(proj_custom, None, stats_custom),
-        use_container_width=True, hide_index=True,
+        width='stretch', hide_index=True,
     )
 
     st.divider()
@@ -663,7 +661,7 @@ with tab2:
             max_val        = max_v,
             lower_is_better= lower_better,
         )
-        g_cols[i].plotly_chart(fig, use_container_width=True)
+        g_cols[i].plotly_chart(fig, width='stretch')
 
     st.divider()
 
